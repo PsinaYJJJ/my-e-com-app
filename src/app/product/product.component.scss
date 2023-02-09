@@ -1,0 +1,17 @@
+$left-width: 40%;
+$left-min-width: 100px;
+$right-min-width: 200px;
+.content{
+    display: flex;
+    flex-direction: row;
+    .content-left{
+        background-color: aquamarine;
+        width: $left-width;
+        min-width: $left-min-width;
+    }
+    .content-right{
+        background-color: salmon;
+        width: calc(100% - $left-width);
+        min-width: $right-min-width;
+    }
+}
