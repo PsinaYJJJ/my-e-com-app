@@ -15,6 +15,7 @@ export class ProductService {
       productId : 1231,
       shopId : 123,
       createdDate : new Date("2022-03-25"),
+      pic: "assets/pexels-photo-1152077.jpeg",
     },
     {
       productName : "Ice-cream",
@@ -25,6 +26,7 @@ export class ProductService {
       productId : 1232,
       shopId : 123,
       createdDate : new Date("2023-01-25"),
+      pic: "assets/ice-cream.jpg",
     },
     {
       productName : "shirt",

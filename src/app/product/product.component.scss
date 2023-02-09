@@ -4,14 +4,15 @@ $right-min-width: 200px;
 .content{
     display: flex;
     flex-direction: row;
-    height: 100vh;
+
     .content-left{
-        background-color: rgb(255, 255, 247);
+        // background-color: rgb(255, 255, 247);
         width: $left-width;
         min-width: $left-min-width;
+        border-right: 1px solid rgb(222, 222, 222);
     }
     .content-right{
-        background-color: salmon;
+        // background-color: salmon;
         width: calc(100% - $left-width);
         min-width: $right-min-width;
     }

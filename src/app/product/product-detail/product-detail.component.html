@@ -16,10 +16,20 @@
             </ng-template>
         </div>
         <div class="content">
-            <img [src]="product?.pic ? product?.pic : 'assets/pexels-photo-1152077.jpeg'" alt="{{product?.productName}}">
-            <p class="price">{{product?.price | currency:'฿':'code'}}</p>
-            <p>{{product?.createdDate | date}}</p>
-            <p>{{product?.description}}</p>
+            <img [src]="product?.pic ? product?.pic : 'assets/pexels-photo-1152077.jpeg'" 
+            alt="{{product?.productName}}">
+            <div class="price-stock-add-to-cart-section">
+                <div class="price-stock">
+                    <p class="price">Price : {{product?.price | currency:'฿':'code'}}</p>
+                    <p class="stock">In-Stock : {{product?.stock}}</p>
+                </div>
+                <button class="btn btn-primary" type="button">Add to Cart</button>
+            </div>
+            <div class="description-section">
+                <p class="description-header">Description :</p>
+                <p class="description">{{product?.description}}</p>
+                <p class="date">{{product?.createdDate | date}}</p>
+            </div>
         </div>
     </div>
   </ng-template>
