@@ -4,9 +4,9 @@ export class Product {
     productType : string
     description : string
     price : number
-    Stock : number
+    stock : number
     productId : number
-    ShopId : number
+    shopId : number
     createdDate : Date
     lastEdited? : Date
   }

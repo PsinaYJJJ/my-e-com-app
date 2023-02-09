@@ -1,10 +1,13 @@
 <!-- <p>product-lists works!</p> -->
 <ng-template [ngIf]="products.length > 0">
-    <div class="product"
-    *ngFor="let product of products">
+    <div class="product-list"
+    *ngFor="let product of products"
+    routerLink="{{product.productId}}"
+    routerLinkActive="active"
+    (click)="onSelectProduct(product)">
     <div class="header">
         <p class="title">{{product.productName | titlecase}}</p>
-        <p class="price">{{product.price}}</p>
+        <p class="price">{{product.price | currency:'฿':'code'}}</p>
     </div>
     <div class="detail">
         <p>{{product.createdDate | date}}</p>

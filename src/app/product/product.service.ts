@@ -11,9 +11,9 @@ export class ProductService {
       description : "The Pastel Bag with 20x20 cm in size,",
       productType : "Bag",
       price : 2000,
-      Stock : 5,
-      productId : 1,
-      ShopId : 123,
+      stock : 5,
+      productId : 1231,
+      shopId : 123,
       createdDate : new Date("2022-03-25"),
     },
     {
@@ -21,9 +21,9 @@ export class ProductService {
       description : "Ice-cream bucket, 1 Liter",
       productType : "Food",
       price : 150,
-      Stock : 10,
-      productId : 2,
-      ShopId : 123,
+      stock : 10,
+      productId : 1232,
+      shopId : 123,
       createdDate : new Date("2023-01-25"),
     },
     {
@@ -31,9 +31,9 @@ export class ProductService {
       description : "Red shirt size L",
       productType : "Shirt",
       price : 80,
-      Stock : 1000,
-      productId : 6,
-      ShopId : 456,
+      stock : 1000,
+      productId : 4566,
+      shopId : 456,
       createdDate : new Date("2023-01-25"),
     },
   ]
@@ -41,5 +41,11 @@ export class ProductService {
 
   getProducts(){
     return this.products.slice()
+  }
+  getFirstProductId(){
+    return this.products.slice()[0].productId
+  }
+  getProductbyProductId(productId:Number): Product | undefined{
+    return this.products.find(product => product.productId === productId)
   }
 }

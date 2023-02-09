@@ -1,1 +1,18 @@
-<p>product-detail works!</p>
+<!-- <p>product-detail works!</p> -->
+<ng-container
+  *ngIf="product; then content; else notFound">
+</ng-container>
+
+<ng-template #content>
+    <div class="product-detail">
+        <p class="title">{{product?.productName | titlecase}}</p>
+        <p class="price">{{product?.price | currency:'฿':'code'}}</p>
+        <p>{{product?.createdDate | date}}</p>
+        <p>{{product?.description}}</p>
+    </div>
+  </ng-template>
+<ng-template #notFound>
+    <div class="product-detail not-found">
+        <h1>Product detail is not Found!!</h1>
+    </div>
+</ng-template>

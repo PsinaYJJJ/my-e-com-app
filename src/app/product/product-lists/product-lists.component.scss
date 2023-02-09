@@ -1,4 +1,4 @@
-.product{
+.product-list{
     padding: 6px;
     border-bottom: 1px solid rgb(222, 222, 222);
     p{
@@ -13,5 +13,13 @@
     .detail{
         font-weight: lighter;
         font-size: 12px;
+    }
+    &:hover{
+        cursor: pointer;
+        background-color: rgba(157, 0, 255, 0.1);;
+    }
+    &.active{
+        cursor: pointer;
+        background-color: rgba(0, 255, 149, 0.2);;
     }
 }
