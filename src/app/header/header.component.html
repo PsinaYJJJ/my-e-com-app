@@ -14,14 +14,14 @@
         role="button"
         aria-expanded="false"
         (click)="onToggleDropdown($event)">
-        {{ UserType[user.userType] }}
+        {{ UserType[user.userType] | titlecase}}
         </a>
         <ul class="dropdown-menu"
             [ngClass]="{show : this.toggleDropdown}">
             <li 
             *ngFor="let type of userTypeList"
             (click)="onSelect(type)">
-            <a class="dropdown-item">{{type}}</a></li>
+            <a class="dropdown-item">{{type | titlecase}}</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" >Separated link</a></li>
         </ul>

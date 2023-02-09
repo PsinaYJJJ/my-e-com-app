@@ -4,6 +4,7 @@ $right-min-width: 200px;
 .content{
     display: flex;
     flex-direction: row;
+    height: 100vh;
     .content-left{
         background-color: aquamarine;
         width: $left-width;
