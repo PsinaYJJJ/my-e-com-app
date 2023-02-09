@@ -43,4 +43,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.userChanged$?.unsubscribe()
   }
+
+  isDisableAddToCart(stock:any):Boolean{
+    return stock? stock <= 0 : true
+  }
 }
