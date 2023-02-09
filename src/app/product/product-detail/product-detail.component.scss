@@ -1,0 +1,23 @@
+.product-detail{
+    .header{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        p {
+            margin: 0px;
+        }
+        .title {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .button-group{
+            display: flex;
+            gap: 8px;
+        }
+    }
+    .content{
+        img{
+            width: 100%;
+        }
+    }
+}

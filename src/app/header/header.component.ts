@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserType } from '../enum/user-type.enum';
 import { User } from '../models/user.model';
@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   public toggleDropdown:boolean = false
   public user:User
   public userTypeList:string[] = [
@@ -50,5 +50,6 @@ export class HeaderComponent implements OnInit {
         break;
     }
     this.userService.changeUser(this.user)
+    this.toggleDropdown = !this.toggleDropdown
   }
 }

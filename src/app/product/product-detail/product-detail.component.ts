@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserType } from 'src/app/enum/user-type.enum';
 import { Product } from 'src/app/models/product.model';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 import { ProductService } from '../product.service';
 
 @Component({
@@ -8,23 +12,35 @@ import { ProductService } from '../product.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnDestroy {
   public product: Product | undefined
+  public isAdmin: Boolean = false
   private productId: number
+  private userChanged$ : Subscription;
   constructor(private route: ActivatedRoute,
     private productService: ProductService,
     private router: Router,
+    private userService: UserService
     ) {}
   ngOnInit(): void {
+    this.isAdmin = this.userService.getUser().userType === UserType.admin
+    this.userChanged$ = this.userService.userChanged.subscribe(
+      (user:User) => {
+        this.isAdmin = user.userType === UserType.admin
+      }
+    )
     this.route.params.subscribe((params: Params) => {
       this.productId = Number(params['productId'])
       if(this.productId){
-        console.log("this.productId", this.productId)
         this.product = this.productService.getProductbyProductId(this.productId)
       }else if(!params['productId']){
         this.productId = this.productService.getFirstProductId()
         this.router.navigate([this.productId], { relativeTo: this.route });
       }
     });
+  }
+
+  ngOnDestroy(){
+    this.userChanged$?.unsubscribe()
   }
 }
