@@ -5,7 +5,7 @@ import { Subject } from "rxjs";
 
 @Injectable()
 export class UserService {
-  public user:User = {
+  private user:User = {
     userType : UserType.basic
   }
   userChanged = new Subject<User>()

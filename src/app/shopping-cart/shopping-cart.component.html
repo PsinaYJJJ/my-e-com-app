@@ -1,1 +1,5 @@
-<p>shopping-cart works!</p>
+<div *ngFor="let product of productsInCart">
+    <p>Name : {{product.productName}}</p>
+    <p>Amount : {{product.amount}}</p>
+    <p>Total : {{product.totalPrice | currency:'฿':'code'}}</p>
+</div>

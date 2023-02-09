@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserType } from 'src/app/enum/user-type.enum';
 import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { ProductService } from '../product.service';
 
@@ -20,7 +21,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private productService: ProductService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private shoppingCartService: ShoppingCartService,
     ) {}
   ngOnInit(): void {
     this.isAdmin = this.userService.getUser().userType === UserType.admin
@@ -46,5 +48,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   isDisableAddToCart(stock:any):Boolean{
     return stock? stock <= 0 : true
+  }
+
+  onAddToCart(){
+    if(this.product){
+      this.shoppingCartService.addProductToCart(this.product)
+    }
   }
 }

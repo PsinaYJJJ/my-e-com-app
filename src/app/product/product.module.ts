@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ProductService } from './product.service';
 import { ShortenTextPipe } from '../pipe/shorten-text.pipe';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 
 
@@ -26,6 +27,6 @@ import { ShortenTextPipe } from '../pipe/shorten-text.pipe';
     ProductListsComponent,
     ProductDetailComponent
   ],
-  providers: [UserService, ProductService],
+  providers: [UserService, ProductService, ShoppingCartService],
 })
 export class ProductModule { }

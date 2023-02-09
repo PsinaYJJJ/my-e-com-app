@@ -5,7 +5,7 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  public products:Product[]=[
+  private products:Product[]=[
     {
       productName : "Pastel Bag",
       description : "The Pastel Bag with 20x20 cm in size,",

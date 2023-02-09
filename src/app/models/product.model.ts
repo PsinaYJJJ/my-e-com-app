@@ -10,3 +10,7 @@ export class Product {
     createdDate : Date
     lastEdited? : Date
   }
+  export class ProductInCart extends Product{
+    amount : number
+    totalPrice : number 
+  }
