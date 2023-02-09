@@ -6,6 +6,7 @@ import { ProductComponent } from './product.component';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ProductService } from './product.service';
+import { ShortenTextPipe } from '../pipe/shorten-text.pipe';
 
 
 
@@ -13,7 +14,8 @@ import { ProductService } from './product.service';
   declarations: [
     ProductComponent,
     ProductListsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ShortenTextPipe
   ],
   imports: [
     CommonModule,

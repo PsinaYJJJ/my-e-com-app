@@ -9,11 +9,13 @@ import { ProductModule } from './product/product.module';
 import { UserService } from './services/user.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { ShortenTextPipe } from './pipe/shorten-text.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    // ShortenTextPipe,
     // ProductComponent,
     // ShoppingCartComponent
   ],

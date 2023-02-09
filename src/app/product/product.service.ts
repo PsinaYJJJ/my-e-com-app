@@ -9,7 +9,7 @@ export class ProductService {
     {
       productName : "Pastel Bag",
       description : "The Pastel Bag with 20x20 cm in size,",
-      productType : "Bag",
+      productType : "bag",
       price : 2000,
       stock : 5,
       productId : 1231,
@@ -20,7 +20,7 @@ export class ProductService {
     {
       productName : "Ice-cream",
       description : "Ice-cream bucket, 1 Liter",
-      productType : "Food",
+      productType : "food",
       price : 150,
       stock : 10,
       productId : 1232,
@@ -31,12 +31,22 @@ export class ProductService {
     {
       productName : "shirt",
       description : "Red shirt size L",
-      productType : "Shirt",
+      productType : "shirt",
       price : 80,
       stock : 1000,
       productId : 4566,
       shopId : 456,
       createdDate : new Date("2023-01-25"),
+    },
+    {
+      productName : "Test",
+      description : "ajhdaskjdhkaskjeuiwrualjfaksfj;sdlfksdl;gmf.,xmvlksilwaurljlk;lv';l',./,z/.msdsa",
+      productType : "shirt",
+      price : 100,
+      stock : 0,
+      productId : 4569,
+      shopId : 456,
+      createdDate : new Date("2022-01-30"),
     },
   ]
   constructor() { }

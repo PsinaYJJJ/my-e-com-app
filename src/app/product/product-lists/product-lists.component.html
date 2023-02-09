@@ -11,7 +11,7 @@
     </div>
     <div class="detail">
         <p>{{product.createdDate | date}}</p>
-        <p>{{product.description}}</p>
+        <p>{{product.description | shortenText:20}}</p>
     </div>
     </div>
 </ng-template>
