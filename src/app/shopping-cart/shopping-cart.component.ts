@@ -9,14 +9,19 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   public productsInCart: ProductInCart[]
-  public headerList = ['#', 'tick to check-out', 'name', 'amount', 'total']
+  public headerList = ['#', 'check-out', 'name', 'amount', 'total']
+  public isSelectedAll:boolean = false
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.productsInCart = this.shoppingService.getProductInCart()
   }
 
-  onChecked(event:Event){
-    console.log('event', event)
+  onChecked(product:ProductInCart, event:Event){
+    console.log('product', product)
+  }
+
+  onCheckedSelectAll(){
+    this.shoppingService.setIsCheckOutAll(this.isSelectedAll)
   }
 }

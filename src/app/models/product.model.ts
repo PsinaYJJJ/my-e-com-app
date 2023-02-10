@@ -12,5 +12,6 @@ export class Product {
   }
   export class ProductInCart extends Product{
     amount : number
-    totalPrice : number 
+    totalPrice : number
+    isCheckOut : boolean
   }

@@ -3,18 +3,31 @@
         <thead>
           <tr class="table-primary">
             <th scope="col"
-            *ngFor="let header of headerList">{{ header | titlecase}}</th>
+            *ngFor="let header of headerList">
+            <ng-template [ngIf]="header === 'check-out'">
+              <input class="form-check-input"
+                type="checkbox"
+                name="select-all"
+                [(ngModel)]="isSelectedAll"
+                (change)="onCheckedSelectAll()"
+                id="flexCheckDefault"
+                >
+            </ng-template>
+            {{ header | titlecase}}
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let product of productsInCart; let i=index">
             <th scope="row">{{i+1}}</th>
             <td>
-                <input
+                <input class="form-check-input"
                 type="checkbox"
                 name="{{product.productId}}"
-                id="{{product.productId}}"
-                (click)="onChecked($event)">
+                [(ngModel)]="product.isCheckOut"
+                (change)="onChecked(product,$event)"
+                id="flexCheckDefault"
+                >
             </td>
             <td>{{product.productName}}</td>
             <td>{{product.amount}}</td>

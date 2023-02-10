@@ -20,10 +20,18 @@ export class ShoppingCartService {
     } else {
       const obj = { 
         amount : 1,
-        totalPrice : product.price
+        totalPrice : product.price,
+        isCheckOut :false
       }
       const productInCart:ProductInCart = {...product, ...obj}
       this.productsInCart.push( productInCart)
     }
+  }
+  setIsCheckOutAll(isCheckOut : boolean){
+    this.productsInCart.forEach(
+      (product) =>{
+        product.isCheckOut = isCheckOut
+      }
+    )
   }
 }
