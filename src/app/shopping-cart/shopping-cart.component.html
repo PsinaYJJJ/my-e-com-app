@@ -1,5 +1,5 @@
 <div class="product-list-in-cart">
-    <table class="table">
+    <table class="table table-striped table-hover">
         <thead>
           <tr class="table-primary">
             <th scope="col"
@@ -10,7 +10,11 @@
           <tr *ngFor="let product of productsInCart; let i=index">
             <th scope="row">{{i+1}}</th>
             <td>
-                <input type="checkbox" name="{{product.productId}}" id="{{product.productId}}">
+                <input
+                type="checkbox"
+                name="{{product.productId}}"
+                id="{{product.productId}}"
+                (click)="onChecked($event)">
             </td>
             <td>{{product.productName}}</td>
             <td>{{product.amount}}</td>
@@ -18,4 +22,8 @@
           </tr>
         </tbody>
     </table>
+    <div class="footer"
+    *ngIf="productsInCart.length > 0">
+    <p class="total">Check-Out total: </p>
+    </div>
 </div>

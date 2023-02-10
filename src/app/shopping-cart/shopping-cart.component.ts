@@ -16,4 +16,7 @@ export class ShoppingCartComponent implements OnInit {
     this.productsInCart = this.shoppingService.getProductInCart()
   }
 
+  onChecked(event:Event){
+    console.log('event', event)
+  }
 }
