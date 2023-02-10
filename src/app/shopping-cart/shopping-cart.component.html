@@ -1,5 +1,21 @@
-<div *ngFor="let product of productsInCart">
-    <p>Name : {{product.productName}}</p>
-    <p>Amount : {{product.amount}}</p>
-    <p>Total : {{product.totalPrice | currency:'฿':'code'}}</p>
+<div class="product-list-in-cart">
+    <table class="table">
+        <thead>
+          <tr class="table-primary">
+            <th scope="col"
+            *ngFor="let header of headerList">{{ header | titlecase}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productsInCart; let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>
+                <input type="checkbox" name="{{product.productId}}" id="{{product.productId}}">
+            </td>
+            <td>{{product.productName}}</td>
+            <td>{{product.amount}}</td>
+            <td>{{product.totalPrice}}</td>
+          </tr>
+        </tbody>
+    </table>
 </div>

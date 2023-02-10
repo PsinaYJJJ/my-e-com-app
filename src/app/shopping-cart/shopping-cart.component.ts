@@ -9,6 +9,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   public productsInCart: ProductInCart[]
+  public headerList = ['#', 'tick to check-out', 'name', 'amount', 'total']
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
