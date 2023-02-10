@@ -15,7 +15,7 @@ export class ShoppingCartService {
   addProductToCart(product:Product){
     const index = this.productsInCart.findIndex(productInCart => productInCart.productId === product.productId)
     if(index > -1){
-      this.productsInCart[index].amount = this.productsInCart[index].amount++
+      this.productsInCart[index].amount = this.productsInCart[index].amount + 1
       this.productsInCart[index].totalPrice = this.productsInCart[index].price * this.productsInCart[index].amount
     } else {
       const obj = { 
@@ -25,6 +25,5 @@ export class ShoppingCartService {
       const productInCart:ProductInCart = {...product, ...obj}
       this.productsInCart.push( productInCart)
     }
-    
   }
 }
