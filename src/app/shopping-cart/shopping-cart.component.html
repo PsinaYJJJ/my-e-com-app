@@ -28,15 +28,18 @@
                 (change)="onChecked(product,$event)"
                 id="flexCheckDefault"
                 >
+                <label class="form-check-label" for="flexCheckDefault">
+                  Check-Out {{product.productName}}
+                </label>
             </td>
             <td>{{product.productName}}</td>
             <td>{{product.amount}}</td>
-            <td>{{product.totalPrice}}</td>
+            <td>{{product.totalPrice | currency:'฿':'code'}}</td>
           </tr>
         </tbody>
     </table>
     <div class="footer"
     *ngIf="productsInCart.length > 0">
-    <p class="total">Check-Out total: </p>
+    <p class="total">Check-Out total: {{ totalCost | currency:'฿':'code'}}</p>
     </div>
 </div>

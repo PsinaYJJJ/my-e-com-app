@@ -11,17 +11,24 @@ export class ShoppingCartComponent implements OnInit {
   public productsInCart: ProductInCart[]
   public headerList = ['#', 'check-out', 'name', 'amount', 'total']
   public isSelectedAll:boolean = false
+  public totalCost:number = 0
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.productsInCart = this.shoppingService.getProductInCart()
+    this.isSelectedAll = this.shoppingService.isAllCheckOut()
+    this.totalCost = this.shoppingService.getTotalCost()
   }
 
   onChecked(product:ProductInCart, event:Event){
     console.log('product', product)
+    this.shoppingService.editProductinCart(product)
+    this.isSelectedAll = this.shoppingService.isAllCheckOut()
+    this.totalCost = this.shoppingService.getTotalCost()
   }
 
   onCheckedSelectAll(){
     this.shoppingService.setIsCheckOutAll(this.isSelectedAll)
+    this.totalCost = this.shoppingService.getTotalCost()
   }
 }

@@ -29,9 +29,41 @@ export class ShoppingCartService {
   }
   setIsCheckOutAll(isCheckOut : boolean){
     this.productsInCart.forEach(
-      (product) =>{
-        product.isCheckOut = isCheckOut
+      (productInCart) =>{
+        productInCart.isCheckOut = isCheckOut
       }
     )
+  }
+
+  editProductinCart(product: ProductInCart){
+    const index = this.productsInCart.findIndex(
+      productInCart => productInCart.productId === product.productId
+    )
+    if (index >-1){
+      this.productsInCart[index] = product
+    }
+  }
+
+  isAllCheckOut():boolean{
+    const index = this.productsInCart.findIndex(
+      (product) => product.isCheckOut === false
+    )
+    if(index > -1) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  getTotalCost():number{
+    let result:number = 0
+    this.productsInCart.forEach(
+      (productInCart) => {
+        if(productInCart.isCheckOut){
+          result = result + productInCart.totalPrice
+        }
+      }
+    ) 
+    return result
   }
 }
