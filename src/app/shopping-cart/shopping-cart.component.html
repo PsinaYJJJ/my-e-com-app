@@ -33,13 +33,31 @@
                 </label>
             </td>
             <td>{{product.productName}}</td>
-            <td>{{product.amount}}</td>
+            <td>
+              <input
+              type="number"
+              id="amount"
+              name="amount"
+              [(ngModel)]="product.amount"
+              (change)="onChangeAmount(product,$event)"
+              min="1"
+              [max]="product.stock"
+              >
+            </td>
             <td>{{product.totalPrice | currency:'฿':'code'}}</td>
           </tr>
         </tbody>
     </table>
     <div class="footer"
     *ngIf="productsInCart.length > 0">
-    <p class="total">Check-Out total: {{ totalCost | currency:'฿':'code'}}</p>
+      <p class="total">Check-Out total: {{ totalCost | currency:'฿':'code'}}</p>
+      <button 
+      *ngIf="totalCost > 0"
+      class="btn btn-primary" 
+      type="button"
+      (click)="onCheckOut()"
+      >
+      Check-Out
+      </button>
     </div>
 </div>

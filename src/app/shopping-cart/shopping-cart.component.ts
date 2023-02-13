@@ -27,8 +27,19 @@ export class ShoppingCartComponent implements OnInit {
     this.totalCost = this.shoppingService.getTotalCost()
   }
 
+  onChangeAmount(product:ProductInCart, event:Event){
+    product.totalPrice = product.amount*product.price
+    console.log('product', product)
+    this.shoppingService.editProductinCart(product)
+    this.totalCost = this.shoppingService.getTotalCost()
+  }
+
   onCheckedSelectAll(){
     this.shoppingService.setIsCheckOutAll(this.isSelectedAll)
     this.totalCost = this.shoppingService.getTotalCost()
+  }
+
+  onCheckOut(){
+    console.log(this.productsInCart)
   }
 }
