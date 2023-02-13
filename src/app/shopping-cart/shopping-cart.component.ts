@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProductInCart } from '../models/product.model';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
@@ -12,12 +13,18 @@ export class ShoppingCartComponent implements OnInit {
   public headerList = ['#', 'check-out', 'name', 'amount', 'total']
   public isSelectedAll:boolean = false
   public totalCost:number = 0
+  private productsInCartChanged$ : Subscription;
   constructor(private shoppingService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.productsInCart = this.shoppingService.getProductInCart()
     this.isSelectedAll = this.shoppingService.isAllCheckOut()
     this.totalCost = this.shoppingService.getTotalCost()
+    this.productsInCartChanged$ = this.shoppingService.productsInCartChanged.subscribe(
+      (productsInCart) => {
+        this.productsInCart = productsInCart
+      }
+    )
   }
 
   onChecked(product:ProductInCart, event:Event){
@@ -41,5 +48,6 @@ export class ShoppingCartComponent implements OnInit {
 
   onCheckOut(){
     console.log(this.productsInCart)
+    this.shoppingService.checkOut()
   }
 }

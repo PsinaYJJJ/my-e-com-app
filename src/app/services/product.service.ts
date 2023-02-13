@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Product, ProductInCart } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +59,20 @@ export class ProductService {
   }
   getProductbyProductId(productId:Number): Product | undefined{
     return this.products.find(product => product.productId === productId)
+  }
+
+  reduceStock(productsInCart:ProductInCart[]){
+    productsInCart.forEach(
+      (productsInCart) => {
+        if(productsInCart.isCheckOut){
+          const index = this.products.findIndex(
+            product => product.productId === productsInCart.productId
+          )
+          if(index > -1) {
+            this.products[index].stock = this.products[index].stock - productsInCart.amount
+          }
+        }
+      }
+    )
   }
 }

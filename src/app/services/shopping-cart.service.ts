@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Product, ProductInCart } from '../models/product.model';
 import { Subject } from "rxjs";
+import { ProductService } from './product.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
   private productsInCart:ProductInCart[] = []
-  productsInCartChanged = new Subject<Product[]>()
-  constructor() { }
+  public productsInCartChanged = new Subject<ProductInCart[]>()
+  constructor(private productService : ProductService) { }
 
   getProductInCart(){
     return this.productsInCart.slice()
@@ -66,4 +67,27 @@ export class ShoppingCartService {
     ) 
     return result
   }
+
+  removeProductsinCart(){
+    this.productsInCart.forEach(
+      (productInCart, index) => {
+        if(productInCart.isCheckOut){
+          this.productsInCart.splice(index,1);
+        }
+      }
+    ) 
+    this.productsInCartChanged.next(this.productsInCart)
+  }
+
+  removeProductinCart(productInCart:ProductInCart){
+    const index = this.productsInCart.findIndex(product => product.productId === productInCart.productId)
+    if(index > -1){
+      this.productsInCart.splice(index,1);
+    }
+  }
+  checkOut(){
+    this.productService.reduceStock(this.productsInCart)
+    this.removeProductsinCart()
+  }
+
 }
