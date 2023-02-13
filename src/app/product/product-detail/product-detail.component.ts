@@ -6,7 +6,7 @@ import { Product } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 import { UserService } from 'src/app/services/user.service';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product-detail',
