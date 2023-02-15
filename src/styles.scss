@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.small-pop-up{
+    $width: 20px;
+    position: absolute;
+    z-index: 1;
+    width: $width;
+    height: $width;
+    line-height: $width;
+    border-radius: 50%;
+    font-size: calc($width/2);
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    background: var(--bs-red);
+}

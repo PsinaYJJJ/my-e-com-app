@@ -10,11 +10,13 @@ import { UserService } from './services/user.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { ShortenTextPipe } from './pipe/shorten-text.pipe';
+import { SmallPopUpDirective } from './directive/small-pop-up.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    SmallPopUpDirective,
     // ShortenTextPipe,
     // ProductComponent,
     // ShoppingCartComponent
