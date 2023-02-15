@@ -70,13 +70,7 @@ export class ShoppingCartService {
   }
 
   removeProductsinCart(){
-    this.productsInCart.forEach(
-      (productInCart, index) => {
-        if(productInCart.isCheckOut){
-          this.productsInCart.splice(index,1);
-        }
-      }
-    ) 
+    this.productsInCart = this.productsInCart.filter(productInCart => !productInCart.isCheckOut);
     this.productsInCartChanged.next(this.productsInCart)
   }
 

@@ -5,17 +5,19 @@ import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2 } from '@ang
 })
 export class SmallPopUpDirective implements OnInit, OnChanges{
 
-  @Input() lengthValue: number;
+  @Input() lengthValue: number = 0;
   elSmallPopUp: any;
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2,
               ) { }
 
   ngOnInit() {
+    console.log('ngOnInit() lengthValue', this.lengthValue)
     this.showOrRemovePopUp()
   }
 
   ngOnChanges() {
+    console.log('ngOnChanges() lengthValue', this.lengthValue)
     this.showOrRemovePopUp()
   }
 
@@ -41,10 +43,11 @@ export class SmallPopUpDirective implements OnInit, OnChanges{
   }
 
   showOrRemovePopUp(){
-    if(this.lengthValue && this.lengthValue > 0){
-      this.showPopup()
-    }else if(this.lengthValue && this.lengthValue <= 0){
+    if(this.elSmallPopUp){
       this.removePopup()
+    }
+    if(this.lengthValue > 0){
+      this.showPopup()
     }
   }
 }

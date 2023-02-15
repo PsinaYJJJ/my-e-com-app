@@ -51,7 +51,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   onCheckOut(){
-    console.log(this.productsInCart)
     this.shoppingService.checkOut()
+    this.totalCost = this.shoppingService.getTotalCost()
   }
 }
