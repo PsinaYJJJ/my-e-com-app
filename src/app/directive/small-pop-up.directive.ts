@@ -1,9 +1,9 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appSmallPopUp]'
 })
-export class SmallPopUpDirective implements OnInit{
+export class SmallPopUpDirective implements OnInit, OnChanges{
 
   @Input() lengthValue: number;
   elSmallPopUp: any;
@@ -12,9 +12,11 @@ export class SmallPopUpDirective implements OnInit{
               ) { }
 
   ngOnInit() {
-    if(this.lengthValue && this.lengthValue > 0){
-      this.showPopup()
-    }
+    this.showOrRemovePopUp()
+  }
+
+  ngOnChanges() {
+    this.showOrRemovePopUp()
   }
 
   showPopup(){
@@ -30,5 +32,19 @@ export class SmallPopUpDirective implements OnInit{
 
     this.renderer.setStyle(this.elSmallPopUp, 'top', `${top}px`);
     this.renderer.setStyle(this.elSmallPopUp, 'left', `${right}px`);
+  }
+
+  removePopup(){
+    this.renderer.removeClass(this.elSmallPopUp, 'small-pop-up');
+    this.renderer.removeChild(document.body, this.elSmallPopUp);
+    this.elSmallPopUp = null;
+  }
+
+  showOrRemovePopUp(){
+    if(this.lengthValue && this.lengthValue > 0){
+      this.showPopup()
+    }else if(this.lengthValue && this.lengthValue <= 0){
+      this.removePopup()
+    }
   }
 }

@@ -27,6 +27,7 @@ export class ShoppingCartService {
       const productInCart:ProductInCart = {...product, ...obj}
       this.productsInCart.push( productInCart)
     }
+    this.productsInCartChanged.next(this.productsInCart)
   }
   setIsCheckOutAll(isCheckOut : boolean){
     this.productsInCart.forEach(

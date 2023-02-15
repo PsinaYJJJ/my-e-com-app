@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserType } from '../enum/user-type.enum';
 import { User } from '../models/user.model';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -16,11 +17,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     UserType[0],
     UserType[1]
   ]
+  public productInCartLength: number = 0
   private userChanged$ : Subscription;
+  private productsInCartChanged$ : Subscription;
   get UserType(){
     return UserType
   }
-  constructor(private userService : UserService) {
+  constructor(private userService : UserService,
+              private shoppingService: ShoppingCartService) {
   }
 
   ngOnInit(): void {
@@ -30,10 +34,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.user = user
       }
     )
+
+    this.productsInCartChanged$ = this.shoppingService.productsInCartChanged.subscribe(
+      (productsInCart) => {
+        this.productInCartLength = productsInCart.length
+      }
+    )
+
   }
 
   ngOnDestroy(){
     this.userChanged$?.unsubscribe()
+    this.productsInCartChanged$?.unsubscribe()
   }
 
   onToggleDropdown(event: Event){

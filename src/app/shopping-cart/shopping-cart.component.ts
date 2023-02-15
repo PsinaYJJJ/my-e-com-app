@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProductInCart } from '../models/product.model';
 import { ShoppingCartService } from '../services/shopping-cart.service';
@@ -8,7 +8,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
   public productsInCart: ProductInCart[]
   public headerList = ['#', 'check-out', 'name', 'amount', 'total']
   public isSelectedAll:boolean = false
@@ -25,6 +25,10 @@ export class ShoppingCartComponent implements OnInit {
         this.productsInCart = productsInCart
       }
     )
+  }
+
+  ngOnDestroy(){
+    this.productsInCartChanged$?.unsubscribe()
   }
 
   onChecked(product:ProductInCart, event:Event){
