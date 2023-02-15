@@ -12,12 +12,10 @@ export class SmallPopUpDirective implements OnInit, OnChanges{
               ) { }
 
   ngOnInit() {
-    console.log('ngOnInit() lengthValue', this.lengthValue)
     this.showOrRemovePopUp()
   }
 
   ngOnChanges() {
-    console.log('ngOnChanges() lengthValue', this.lengthValue)
     this.showOrRemovePopUp()
   }
 
