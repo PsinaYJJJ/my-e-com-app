@@ -11,12 +11,13 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { ShortenTextPipe } from './pipe/shorten-text.pipe';
 import { SmallPopUpDirective } from './directive/small-pop-up/small-pop-up.directive';
+import { SmallPopUpModule } from './directive/small-pop-up/small-pop-up.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SmallPopUpDirective,
+    // SmallPopUpDirective,
     // ShortenTextPipe,
     // ProductComponent,
     // ShoppingCartComponent
@@ -26,6 +27,7 @@ import { SmallPopUpDirective } from './directive/small-pop-up/small-pop-up.direc
     AppRoutingModule,
     ProductModule,
     ShoppingCartModule,
+    SmallPopUpModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
