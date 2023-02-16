@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Product, ProductInCart } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  public productsChanged = new Subject<Product[]>()
+  public isProductsEmpty = new BehaviorSubject<boolean>(false)
   private products:Product[]=[
     {
       productName : "Pastel Bag",
@@ -57,22 +60,51 @@ export class ProductService {
   getFirstProductId(){
     return this.products.slice()[0].productId
   }
-  getProductbyProductId(productId:Number): Product | undefined{
-    return this.products.find(product => product.productId === productId)
+  getProductbyProductId(productId:number): Product | undefined{
+    const index = this.getProductIndexbyProductId(productId)
+    return index> -1 ? this.products.slice()[index] : undefined
   }
+
+  getProductbyIndex(index:number): Product{
+    return  this.products.slice()[index]
+  }
+
+  getProductIndexbyProductId(productId:number): number{
+    const index = this.products.findIndex(product => product.productId === productId)
+    return index
+  }
+  addProduct(addedProduct: Product){
+    this.products.push(addedProduct)
+    this.productsChanged.next(this.getProducts())
+  }
+  editProduct(editedProduct: Product){
+    const index = this.getProductIndexbyProductId(editedProduct.productId)
+    this.products[index] = editedProduct
+    this.productsChanged.next(this.getProducts())
+  }
+  deleteProduct(deletedProduct: Product){
+    const index = this.getProductIndexbyProductId(deletedProduct.productId)
+    if(index > -1){
+      this.products.splice(index,1);
+    }
+    this.productsChanged.next(this.getProducts())
+    if(this.products.length === 0){
+      this.isProductsEmpty.next(true)
+    }
+  }
+
 
   reduceStock(productsInCart:ProductInCart[]){
     productsInCart.forEach(
       (productsInCart) => {
         if(productsInCart.isCheckOut){
-          const index = this.products.findIndex(
-            product => product.productId === productsInCart.productId
-          )
+          const index = this.getProductIndexbyProductId(productsInCart.productId)
           if(index > -1) {
             this.products[index].stock = this.products[index].stock - productsInCart.amount
           }
         }
       }
     )
+    this.productsChanged.next(this.getProducts())
   }
 }

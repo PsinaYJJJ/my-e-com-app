@@ -15,9 +15,11 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductDetailComponent implements OnInit, OnDestroy {
   public product: Product | undefined
-  public isAdmin: Boolean = false
+  public isAdmin: boolean = false
   private productId: number
   private userChanged$ : Subscription;
+  private isProductsEmpty$ : Subscription;
+  public isProductsEmpty: boolean
   constructor(private route: ActivatedRoute,
     private productService: ProductService,
     private router: Router,
@@ -31,19 +33,31 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.isAdmin = user.userType === UserType.admin
       }
     )
-    this.route.params.subscribe((params: Params) => {
-      this.productId = Number(params['productId'])
-      if(this.productId){
-        this.product = this.productService.getProductbyProductId(this.productId)
-      }else if(!params['productId']){
-        this.productId = this.productService.getFirstProductId()
-        this.router.navigate([this.productId], { relativeTo: this.route });
+    this.isProductsEmpty$ = this.productService.isProductsEmpty.subscribe(
+      (res) => {
+        this.isProductsEmpty = res
+        if(this.isProductsEmpty){
+          this.product = undefined
+        } else{
+          this.route.params.subscribe(
+            (params: Params) => {
+            this.productId = Number(params['productId'])
+            if(this.productId){
+              this.product = this.productService.getProductbyProductId(this.productId)
+            }
+            else if(!params['productId']){
+              this.setToFirstProduct()
+            }
+          }
+          );
+        }
       }
-    });
+    )
   }
 
   ngOnDestroy(){
     this.userChanged$?.unsubscribe()
+    this.isProductsEmpty$?.unsubscribe()
   }
 
   isDisableAddToCart(stock:any):Boolean{
@@ -53,6 +67,32 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   onAddToCart(){
     if(this.product){
       this.shoppingCartService.addProductToCart(this.product)
+    }
+  }
+
+  setToFirstProduct(){
+    this.productId = this.productService.getFirstProductId()
+    this.router.navigate([this.productId], { relativeTo: this.route });
+  }
+
+  onRemoveProduct(){
+    let neighborProduct:Product
+    const currentIndex = this.productService.getProductIndexbyProductId(this.productId)
+    if (currentIndex > -1){
+      if (currentIndex > 0){
+        neighborProduct = this.productService.getProductbyIndex(currentIndex-1)
+      }else{
+        neighborProduct = this.productService.getProductbyIndex(currentIndex+1)
+      }
+      if(this.product){
+        this.productService.deleteProduct(this.product)
+      }
+      if(neighborProduct?.productId || !this.isProductsEmpty){
+        this.router.navigate([`/product/${neighborProduct?.productId}`])
+      } else {
+        this.router.navigate([`/`])
+      }
+      
     }
   }
 }
