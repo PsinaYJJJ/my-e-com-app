@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { FormsModule } from '@angular/forms';
+import { TooltipModule } from '../directive/tooltip/tooltip.module';
 
 
 
@@ -10,7 +11,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [ShoppingCartComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    TooltipModule
   ],
   providers: [ShoppingCartService],
 })
